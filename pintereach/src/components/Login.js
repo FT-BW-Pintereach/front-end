@@ -19,7 +19,7 @@ const Login = props => {
 	const handleFormSubmit = event => {
 		event.preventDefault();
 		axiosWithAuth()
-			.post("", {
+			.post("/auth/login", {
 				username: data.username,
 				password: data.password
 			})
@@ -40,7 +40,7 @@ const Login = props => {
 			<h2>Log in to start browsing articles</h2>
 			<form onSubmit={handleFormSubmit}>
 				<input
-					type="text"
+					type="string"
 					placeholder="Username"
 					value={data.username}
 					name="username"

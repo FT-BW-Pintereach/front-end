@@ -37,7 +37,7 @@ const Articles = () => {
 							<img src={article.urlToImage} />
                             <h3>{article.title}</h3>
                             <p>{article.description}</p>
-                            {/* <p>Written by: {article.author}</p> */}
+                            <p>{article.author}</p>
 						</div>
 					);
 				})}
@@ -48,4 +48,4 @@ const Articles = () => {
 
 export default Articles;
 
-// "http://newsapi.org/v2/top-headlines?country=us&apiKey=a53c52ba003545dda97ada94feece5a7";
+

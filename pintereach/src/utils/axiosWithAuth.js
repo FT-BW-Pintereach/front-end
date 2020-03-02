@@ -7,9 +7,10 @@ export const axiosWithAuth = () => {
     
 	return axios.create({
 		headers: {
-			authorization: token
+			authorization: token,
+			user_id: id
 		},
-        baseURL: ""
-        // add base api url
+		baseURL: "https://pinter-each.herokuapp.com/api"
+		
 	});
 };

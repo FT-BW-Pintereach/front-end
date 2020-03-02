@@ -19,7 +19,7 @@ const Signup = props => {
 	const handleFormSubmit = event => {
 		event.preventDefault();
 		axiosWithAuth()
-			.post("", {
+			.post("/auth/register", {
 				username: data.username,
 				password: data.password
 			})
@@ -40,7 +40,7 @@ const Signup = props => {
 			<h2>Create an account</h2>
 			<form onSubmit={handleFormSubmit}>
 				<input
-					type="text"
+					type="string"
 					placeholder="Create Username"
 					value={data.username}
 					name="username"

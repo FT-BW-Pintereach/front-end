@@ -14,12 +14,14 @@ function App() {
 		<Router>
 			<div className="App">
 				<h1>Pintereach Project</h1>
-				<Switch>
+        <Switch>
+          {/* change login path to home */}
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/" component={Articles} />
-          {/* <Route component={Login} /> */}
-          <Route component={Articles} />
+          {/* change articles component to protected */}
+          <Route path="/protected" component={Articles} />
+          <Route component={Login} />
+          {/* <Route component={Articles} /> */}
 				</Switch>
 			</div>
 		</Router>
