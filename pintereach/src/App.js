@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Articles from "./components/Articles";
 
 import './App.css';
 
@@ -16,7 +17,9 @@ function App() {
 				<Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-					<Route component={Login} />
+          <Route path="/" component={Articles} />
+          {/* <Route component={Login} /> */}
+          <Route component={Articles} />
 				</Switch>
 			</div>
 		</Router>
