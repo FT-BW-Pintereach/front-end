@@ -36,10 +36,15 @@ div .navbar{
 }
 
 .navbar .link{
-  color:red;
+  color:#393e46;
   /* font-weight: bold; */
 }
 .navbar .link:hover{
   text-decoration: none;
-  color:orange;
+  color:#929aab;
+}
+
+section h2{
+  margin:2%;
+  font-size: 2.5rem;
 }

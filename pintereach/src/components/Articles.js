@@ -37,7 +37,9 @@ const Articles = () => {
 				{articles.map(article => {
 					return (
 						<Card className="article-cards" key={article.url}>
-							<CardImg src={article.urlToImage} />
+							<a href={article.url} target="_blank">
+								<CardImg src={article.urlToImage} />
+							</a>
 							<CardBody className="card-text">
 								<CardTitle>
 									<h3>{article.title}</h3>
@@ -47,7 +49,7 @@ const Articles = () => {
 								</CardText>
 								<CardFooter>
 									<p>{article.author}</p>
-									<CategoryButton/>
+									<CategoryButton />
 								</CardFooter>
 							</CardBody>
 						</Card>
