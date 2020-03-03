@@ -22,8 +22,4 @@ function BoardForm(){
 
 export default BoardForm
 
-
-/*
-
-
-*/
+// manage state with reducers between articles and this

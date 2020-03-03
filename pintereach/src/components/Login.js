@@ -29,7 +29,7 @@ const Login = props => {
 				console.log("from login", res);
 				window.localStorage.setItem("token", res.data.token);
 				// window.localStorage.setItem("id", res.data.id);
-				props.history.push("/protected");
+				props.history.push("/articles");
 				// setData(initialState);
 			})
 			.catch(error => {

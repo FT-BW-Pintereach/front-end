@@ -22,3 +22,9 @@ div .card-text{
  margin-left:.5%;
  margin-right:.5%;
 }
+
+div .navbar{
+  margin:1%;
+  display:flex;
+  justify-content: space-evenly;
+}
