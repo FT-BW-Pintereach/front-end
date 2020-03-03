@@ -2,16 +2,23 @@
   text-align: center;
 }
 
-.article-cards img{
+/* .article-cards img{
   width: 100%;
-}
+} */
 
 div .article-cards{
   width:30%;
+  margin:1%;
 }
 
 .articles-container{
   display:flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin:1%;
+}
+
+div .card-text{
+ margin-left:.5%;
+ margin-right:.5%;
 }

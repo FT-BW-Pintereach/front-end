@@ -63,7 +63,7 @@ const Signup = props => {
 			</form>
 			<footer>
 				<p>Already have an account?</p>
-                <button onClick={() => { props.history.push("/login") }}>Log In</button>
+                <button onClick={() => { props.history.push("/") }}>Log In</button>
 			</footer>
 		</div>
 	);

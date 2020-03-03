@@ -1,8 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import {
+	Card,
+	CardImg,
+	CardText,
+	CardBody,
+	CardTitle,
+	CardFooter,
+	Button,
+	ButtonDropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem
+} from "reactstrap";
+
 const Articles = () => {
+
 	const [articles, setArticles] = useState([]);
+
+	// const [dropdownOpen, setOpen] = useState(false);
+
+	// const toggle = () => setOpen(!dropdownOpen);
 
 	useEffect(() => {
 		axios
@@ -18,27 +37,40 @@ const Articles = () => {
 			});
 	}, []);
 
-	// source: {id: null, name: "Nytimes.com"}
-	// author: "Nick Corasaniti, Alexander Burns"
-	// title: "Amy Klobuchar Drops Out of Presidential Race and Plans to Endorse Biden - The New York Times"
-	// description: "Ms. Klobuchar made her decision hours before Super Tuesday. She shocked the primary field with a third-place finish in New Hampshire, but ultimately could not compete with better-funded rivals."
-	// url: "https://www.nytimes.com/2020/03/02/us/politics/amy-klobuchar-drops-out.html"
-	// urlToImage: "https://static01.nyt.com/images/2020/03/02/us/politics/02klobuchar-out1/02klobuchar-out1-facebookJumbo.jpg"
-	// publishedAt: "2020-03-02T18:31:00Z"
-	// content: "The senator from Minnesota shocked her rival
-
 	return (
         <section>
             <h2>Top Articles</h2>
 			<div className="articles-container">
 				{articles.map(article => {
 					return (
-						<div className="article-cards" key={article.publishedAt}>
-							<img src={article.urlToImage} />
-                            <h3>{article.title}</h3>
-                            <p>{article.description}</p>
-                            <p>{article.author}</p>
-						</div>
+						<Card className="article-cards" key={article.url}>
+							<CardImg src={article.urlToImage} />
+							<CardBody className="card-text">
+								<CardTitle>
+									<h3>{article.title}</h3>
+								</CardTitle>
+								<CardText>
+									<p>{article.description}</p>
+								</CardText>
+								<CardFooter>
+									<p>{article.author}</p>
+									<Button>Add</Button>
+
+									{/* <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+										<DropdownToggle caret color="primary">
+											Add Article
+										</DropdownToggle>
+										<DropdownMenu>
+											<DropdownItem header>Header</DropdownItem>
+											<DropdownItem disabled>Action</DropdownItem>
+											<DropdownItem>Another Action</DropdownItem>
+											<DropdownItem divider />
+											<DropdownItem>Another Action</DropdownItem>
+										</DropdownMenu>
+									</ButtonDropdown> */}
+								</CardFooter>
+							</CardBody>
+						</Card>
 					);
 				})}
 			</div>
@@ -48,4 +80,11 @@ const Articles = () => {
 
 export default Articles;
 
-
+	// source: {id: null, name: "Nytimes.com"}
+	// author: "Nick Corasaniti, Alexander Burns"
+	// title: "Amy Klobuchar Drops Out of Presidential Race and Plans to Endorse Biden - The New York Times"
+	// description: "Ms. Klobuchar made her decision hours before Super Tuesday. She shocked the primary field with a third-place finish in New Hampshire, but ultimately could not compete with better-funded rivals."
+	// url: "https://www.nytimes.com/2020/03/02/us/politics/amy-klobuchar-drops-out.html"
+	// urlToImage: "https://static01.nyt.com/images/2020/03/02/us/politics/02klobuchar-out1/02klobuchar-out1-facebookJumbo.jpg"
+	// publishedAt: "2020-03-02T18:31:00Z"
+	// content: "The senator from Minnesota shocked her rival

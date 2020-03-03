@@ -17,11 +17,11 @@ function App() {
 				<h1>Pintereach Project</h1>
         <Switch>
           {/* change login path to home */}
-          <Route path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
           <Route path="/signup" component={Signup} />
           {/* change articles component to protected */}
           <PrivateRoute path="/protected" component={Articles} />
-          <Route component={Login} />
+          {/* <Route component={Login} /> */}
           {/* <Route component={Articles} /> */}
 				</Switch>
 			</div>
