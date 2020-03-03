@@ -10,7 +10,7 @@ const Articles = () => {
 				"http://newsapi.org/v2/top-headlines?country=us&apiKey=a53c52ba003545dda97ada94feece5a7"
 			)
 			.then(res => {
-				console.log(res.data.articles);
+				// console.log(res.data.articles);
 				setArticles(res.data.articles);
 			})
 			.catch(err => {

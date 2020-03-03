@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Articles from "./components/Articles";
+import PrivateRoute  from "./components/PrivateRoute";
 
 import './App.css';
 
@@ -19,7 +20,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           {/* change articles component to protected */}
-          <Route path="/protected" component={Articles} />
+          <PrivateRoute path="/protected" component={Articles} />
           <Route component={Login} />
           {/* <Route component={Articles} /> */}
 				</Switch>
