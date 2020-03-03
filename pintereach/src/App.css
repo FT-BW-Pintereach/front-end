@@ -21,10 +21,25 @@ div .article-cards{
 div .card-text{
  margin-left:.5%;
  margin-right:.5%;
+ font-size:.9rem;
+}
+
+.card-text h3{
+  font-size: 1.12rem;
 }
 
 div .navbar{
   margin:1%;
   display:flex;
   justify-content: space-evenly;
+
+}
+
+.navbar .link{
+  color:red;
+  /* font-weight: bold; */
+}
+.navbar .link:hover{
+  text-decoration: none;
+  color:orange;
 }

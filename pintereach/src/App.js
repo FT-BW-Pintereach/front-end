@@ -10,8 +10,6 @@ import Articles from "./components/Articles";
 import BoardForm from "./components/BoardForm";
 
 import "./App.css";
-import { Nav,	NavItem, NavLink } from "reactstrap";
-
 
 function App() {
 	const [state, dispatch] = useReducer(Reducer, appState);
