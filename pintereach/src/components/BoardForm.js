@@ -3,9 +3,12 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 function BoardForm() {
 	const initialState = {
-		category: ""
+		name: ""
 	};
 
+	const id = window.localStorage.getItem("id");
+
+	const [categories, setCategories] = useState([]);
 	const [data, setData] = useState(initialState);
 
 	const handleInputChange = event => {
@@ -17,35 +20,56 @@ function BoardForm() {
 
 	const handleFormSubmit = event => {
 		event.preventDefault();
-		// axiosWithAuth()
-		// 	.post("", {
-		// 		category: data.category
-		// 	})
-		// 	.then(res => {
-		// 		setData(res);
-			
-		// 		setData(initialState);
-		// 	})
-		// 	.catch(err => {
-		// 		console.log("error posting data", err);
-		// 	});
+		axiosWithAuth()
+			.post(`/categories/${id}`, {
+				name: data.name
+			})
+			.then(res => {
+				console.log(res);
+				setData(initialState);
+			})
+			.catch(err => {
+				console.log("error posting data", err);
+			});
 	};
+
+	useEffect(() => {
+		axiosWithAuth()
+			.get(`categories/${id}`)
+			.then(res => {
+				// console.log("rendering from get req", res.data);
+				setCategories(res.data);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}, [data]);
 
 	return (
 		<div>
 			<form onSubmit={handleFormSubmit}>
-				<label htmlFor="category">Create a category</label>
+				<label htmlFor="name">Create a category</label>
 				<input
-					id="category"
+					id="name"
 					placeholder="Finance News"
-					name="category"
-					type="text"
+					name="name"
+					type="string"
 					value={data.name}
 					onChange={handleInputChange}
 					required
 				/>
-				<button>Submit</button>
+				<button type="submit">Submit</button>
 			</form>
+			<div>
+				{categories.map(category => {
+					return (
+						<div key={category.id}>
+                            <h4>{category.name}</h4>
+                            <p>list of articles</p>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

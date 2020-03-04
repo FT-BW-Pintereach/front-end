@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import { Reducer, appState } from "./reducers/Reducer";
@@ -8,11 +8,34 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Articles from "./components/Articles";
 import BoardForm from "./components/BoardForm";
+import UserHome from './components/UserHome.js'
 
 import "./App.css";
 
 function App() {
 	const [state, dispatch] = useReducer(Reducer, appState);
+
+	//Category state
+	const [category, setCategory] = useState([
+		{
+			id: 2,
+			name: "Retail"
+		},
+		{
+			id: 3,
+			name: "Real Estate"
+		}
+	]);
+
+	console.log("all categories", category);
+
+	function addCategory(c) {
+		const newCategory = {
+			id: Date.now(),
+			name: c.name
+		};
+		setCategory([...category, newCategory]);
+	}
 
 	return (
 		<Router>
@@ -35,11 +58,15 @@ function App() {
 						</>
 					)}
 				</nav>
+
 				<ArticlesContext.Provider value={{ state, dispatch }}>
 					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route path="/signup" component={Signup} />
 						<PrivateRoute path="/board" component={BoardForm} />
+						<PrivateRoute exact path='/home'>
+							<UserHome addCategory={addCategory}/>
+						</PrivateRoute>
 						<PrivateRoute path="/articles" component={Articles} />
 					</Switch>
 				</ArticlesContext.Provider>
