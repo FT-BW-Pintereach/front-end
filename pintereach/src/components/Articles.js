@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { CategoryButton } from "./CategoryButton";
 
 import {
 	Card,
@@ -7,21 +8,13 @@ import {
 	CardText,
 	CardBody,
 	CardTitle,
-	CardFooter,
-	Button,
-	ButtonDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem
+	CardFooter
 } from "reactstrap";
 
 const Articles = () => {
 
 	const [articles, setArticles] = useState([]);
 
-	// const [dropdownOpen, setOpen] = useState(false);
-
-	// const toggle = () => setOpen(!dropdownOpen);
 
 	useEffect(() => {
 		axios
@@ -44,7 +37,9 @@ const Articles = () => {
 				{articles.map(article => {
 					return (
 						<Card className="article-cards" key={article.url}>
-							<CardImg src={article.urlToImage} />
+							<a href={article.url} target="_blank">
+								<CardImg src={article.urlToImage} />
+							</a>
 							<CardBody className="card-text">
 								<CardTitle>
 									<h3>{article.title}</h3>
@@ -54,20 +49,7 @@ const Articles = () => {
 								</CardText>
 								<CardFooter>
 									<p>{article.author}</p>
-									<Button>Add</Button>
-
-									{/* <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-										<DropdownToggle caret color="primary">
-											Add Article
-										</DropdownToggle>
-										<DropdownMenu>
-											<DropdownItem header>Header</DropdownItem>
-											<DropdownItem disabled>Action</DropdownItem>
-											<DropdownItem>Another Action</DropdownItem>
-											<DropdownItem divider />
-											<DropdownItem>Another Action</DropdownItem>
-										</DropdownMenu>
-									</ButtonDropdown> */}
+									<CategoryButton />
 								</CardFooter>
 							</CardBody>
 						</Card>

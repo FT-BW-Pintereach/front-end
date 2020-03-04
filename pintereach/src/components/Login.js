@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-import { Alert } from "reactstrap";
 
 const Login = props => {
 	const initialState = {
@@ -28,8 +27,8 @@ const Login = props => {
 			.then(res => {
 				console.log("from login", res);
 				window.localStorage.setItem("token", res.data.token);
-				// window.localStorage.setItem("id", res.data.id);
-				props.history.push("/protected");
+				window.localStorage.setItem("id", res.data.id);
+				props.history.push("/articles");
 				// setData(initialState);
 			})
 			.catch(error => {

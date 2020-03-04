@@ -21,4 +21,30 @@ div .article-cards{
 div .card-text{
  margin-left:.5%;
  margin-right:.5%;
+ font-size:.9rem;
+}
+
+.card-text h3{
+  font-size: 1.12rem;
+}
+
+div .navbar{
+  margin:1%;
+  display:flex;
+  justify-content: space-evenly;
+
+}
+
+.navbar .link{
+  color:#393e46;
+  /* font-weight: bold; */
+}
+.navbar .link:hover{
+  text-decoration: none;
+  color:#929aab;
+}
+
+section h2{
+  margin:2%;
+  font-size: 2.5rem;
 }

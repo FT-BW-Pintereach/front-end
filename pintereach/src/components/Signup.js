@@ -26,7 +26,8 @@ const Signup = props => {
 			.then(res => {
 				console.log("from signup", res);
 				window.localStorage.setItem("token", res.data.token);
-				props.history.push("/protected");
+				// window.localStorage.setItem("id", res.data.id);
+				props.history.push("/articles");
 				// setData(initialState);
 			})
 			.catch(error => {
