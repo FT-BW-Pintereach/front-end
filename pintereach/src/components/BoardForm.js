@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { EditCat } from "./EditCat";
 
 function BoardForm() {
 	const initialState = {
 		name: ""
 	};
 
-	const id = window.localStorage.getItem("id");
+	const userId = window.localStorage.getItem("id");
 
 	const [categories, setCategories] = useState([]);
 	const [data, setData] = useState(initialState);
@@ -18,10 +19,22 @@ function BoardForm() {
 		});
 	};
 
+	const fetchCategories = () => {
+		axiosWithAuth()
+			.get(`categories/${userId}`)
+			.then(res => {
+				console.log("rendering from get req", res.data);
+				setCategories(res.data);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+
 	const handleFormSubmit = event => {
 		event.preventDefault();
 		axiosWithAuth()
-			.post(`/categories/${id}`, {
+			.post(`/categories/${userId}`, {
 				name: data.name
 			})
 			.then(res => {
@@ -34,17 +47,20 @@ function BoardForm() {
 	};
 
 	useEffect(() => {
+		fetchCategories();
+	}, [data]);
+	
+	const handleDelete = (id) => {
 		axiosWithAuth()
-			.get(`categories/${id}`)
+			.delete(`categories/${id}`)
 			.then(res => {
-				// console.log("rendering from get req", res.data);
-				setCategories(res.data);
+				fetchCategories();
 			})
 			.catch(err => {
 				console.log(err);
 			});
-	}, [data]);
-
+	}
+	
 	return (
 		<div>
 			<form onSubmit={handleFormSubmit}>
@@ -64,8 +80,11 @@ function BoardForm() {
 				{categories.map(category => {
 					return (
 						<div key={category.id}>
-                            <h4>{category.name}</h4>
-                            <p>list of articles</p>
+							<h4>{category.name}</h4>
+							<p>list of articles</p>
+							<button onClick={() => handleDelete(category.id)}>delete</button>
+							<EditCat name={category.name} />
+							{/* edit modal pass down name prop */}
 						</div>
 					);
 				})}
@@ -77,3 +96,5 @@ function BoardForm() {
 export default BoardForm;
 
 // manage state with reducers between articles and this
+
+

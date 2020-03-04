@@ -25,11 +25,11 @@ const Login = props => {
 				password: data.password
 			})
 			.then(res => {
-				console.log("from login", res);
+				// console.log("from login", res);
 				window.localStorage.setItem("token", res.data.token);
 				window.localStorage.setItem("id", res.data.id);
 				props.history.push("/articles");
-				// setData(initialState);
+				
 			})
 			.catch(error => {
 				console.log(error);
