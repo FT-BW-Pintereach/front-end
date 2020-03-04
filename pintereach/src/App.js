@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import { Reducer, appState } from "./reducers/Reducer";
 import { ArticlesContext } from "./contexts/ArticlesContext";
+import { axiosWithAuth } from "./utils/axiosWithAuth";
 
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -13,6 +14,9 @@ import UserHome from './components/UserHome.js'
 import "./App.css";
 
 function App() {
+
+	const userId = window.localStorage.getItem("id");
+
 	const [state, dispatch] = useReducer(Reducer, appState);
 
 	//Category state
@@ -37,6 +41,19 @@ function App() {
 		setCategory([...category, newCategory]);
 	}
 
+		const fetchCategories = () => {
+			axiosWithAuth()
+				.get(`categories/${userId}`)
+				.then(res => {
+					console.log("rendering from get categories", res.data);
+					dispatch({ type: "FETCH_CATEGORIES", payload: res.data });
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		};
+
+
 	return (
 		<Router>
 			<div className="App">
@@ -59,7 +76,7 @@ function App() {
 					)}
 				</nav>
 
-				<ArticlesContext.Provider value={{ state, dispatch }}>
+				<ArticlesContext.Provider value={{ state, dispatch, fetchCategories }}>
 					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route path="/signup" component={Signup} />

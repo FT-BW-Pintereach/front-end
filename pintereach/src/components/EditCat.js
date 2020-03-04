@@ -1,17 +1,28 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { ArticlesContext } from "../contexts/ArticlesContext";
 export const EditCat = props => {
-    
-	const [cat, setCat] = useState(props.name);
+
+	const { fetchCategories } = useContext(ArticlesContext);
+
+	const [cat, setCat] = useState(props.category.name);
 
 	const handleChanges = e => {
-		setCat({
-			...cat,
-			[e.target.name]: e.target.value
-		});
+		setCat(e.target.value);
 	};
+
+	const handleSubmit = event => {
+		event.preventDefault();
+		axiosWithAuth()
+			.put(`/categories/${props.category.id}`, { name: cat })
+			.then(res => {
+				// update categories
+				fetchCategories();
+			});
+	};
+
 	return (
-		<form>
+		<form onSubmit={handleSubmit}>
 			<input
 				id="name"
 				// placeholder="Finance News"
@@ -20,8 +31,8 @@ export const EditCat = props => {
 				value={cat}
 				onChange={handleChanges}
 				required
-            />
-            <button type="submit">Save</button>
+			/>
+			<button type="submit">Save</button>
 		</form>
 	);
 };

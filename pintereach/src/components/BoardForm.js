@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { EditCat } from "./EditCat";
+import { ArticlesContext } from '../contexts/ArticlesContext'
 
 function BoardForm() {
+	const userId = window.localStorage.getItem("id");
+
+	const { state, fetchCategories } = useContext(ArticlesContext);
+
 	const initialState = {
 		name: ""
 	};
 
-	const userId = window.localStorage.getItem("id");
+	
 
-	const [categories, setCategories] = useState([]);
 	const [data, setData] = useState(initialState);
 
 	const handleInputChange = event => {
@@ -19,17 +23,6 @@ function BoardForm() {
 		});
 	};
 
-	const fetchCategories = () => {
-		axiosWithAuth()
-			.get(`categories/${userId}`)
-			.then(res => {
-				console.log("rendering from get req", res.data);
-				setCategories(res.data);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	}
 
 	const handleFormSubmit = event => {
 		event.preventDefault();
@@ -61,6 +54,7 @@ function BoardForm() {
 			});
 	}
 	
+
 	return (
 		<div>
 			<form onSubmit={handleFormSubmit}>
@@ -77,13 +71,13 @@ function BoardForm() {
 				<button type="submit">Submit</button>
 			</form>
 			<div>
-				{categories.map(category => {
+				{state.categories.map(category => {
 					return (
 						<div key={category.id}>
 							<h4>{category.name}</h4>
 							<p>list of articles</p>
 							<button onClick={() => handleDelete(category.id)}>delete</button>
-							<EditCat name={category.name} />
+							<EditCat category={category} />
 							{/* edit modal pass down name prop */}
 						</div>
 					);
