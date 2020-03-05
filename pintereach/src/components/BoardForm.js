@@ -3,7 +3,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { EditCat } from "./EditCat";
 import { ArticlesContext } from '../contexts/ArticlesContext'
 
-function BoardForm() {
+function BoardForm(props) {
 	const userId = window.localStorage.getItem("id");
 
 	const { state, fetchCategories } = useContext(ArticlesContext);
@@ -74,7 +74,9 @@ function BoardForm() {
 				{state.categories.map(category => {
 					return (
 						<div key={category.id}>
-							<h4>{category.name}</h4>
+							<h4 onClick={() => props.history.push(`/catart/${category.id}`)}>
+								{category.name}
+							</h4>
 							<EditCat category={category} />
 							<button onClick={() => handleDelete(category.id)}>delete</button>
 
@@ -88,7 +90,7 @@ function BoardForm() {
 }
 
 export default BoardForm;
-
+// onClick={props.history.push(`/catart/`)}
 // manage state with reducers between articles and this
 
 
