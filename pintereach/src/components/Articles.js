@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { CategoryButton } from "./CategoryButton";
+import {ArticlesContext} from '../contexts/ArticlesContext'
 
 import {
 	Card,
@@ -13,17 +14,18 @@ import {
 
 const Articles = () => {
 
-	const [articles, setArticles] = useState([]);
+	const { state, dispatch} = useContext(ArticlesContext);
+	
 
 
 	useEffect(() => {
 		axios
 			.get(
-				"http://newsapi.org/v2/top-headlines?country=us&apiKey=a53c52ba003545dda97ada94feece5a7"
+				"http://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&from=2020-03-03&to=2020-03-03&sortBy=popularity&apiKey=a53c52ba003545dda97ada94feece5a7"
 			)
 			.then(res => {
-				// console.log(res.data.articles);
-				setArticles(res.data.articles);
+				console.log(res.data.articles);
+				dispatch({ type: "FETCH_ARTICLES", payload: res.data.articles });
 			})
 			.catch(err => {
 				console.log("err fetching api data", err);
@@ -34,7 +36,7 @@ const Articles = () => {
         <section>
             <h2>Top Articles</h2>
 			<div className="articles-container">
-				{articles.map(article => {
+				{state.articles.map(article => {
 					return (
 						<Card className="article-cards" key={article.url}>
 							<a href={article.url} target="_blank">
@@ -49,7 +51,7 @@ const Articles = () => {
 								</CardText>
 								<CardFooter>
 									<p>{article.author}</p>
-									<CategoryButton />
+									<CategoryButton article={article}/>
 								</CardFooter>
 							</CardBody>
 						</Card>

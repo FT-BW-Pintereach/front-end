@@ -1,0 +1,5 @@
+.category-modal{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 0.5rem;
+}

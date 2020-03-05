@@ -1,14 +1,15 @@
 import React from 'react'
-import BoardFormModal from './BoardFormModal.js'
-// import UserNav from './UserNav.js' 
-// import UserCarousel from './UserCarousel.js'
+import UserNav from './UserNav.js' 
+import UserCarousel from './UserCarousel.js'
+
+import './UserHome.css'
 
 const UserHome = ({addCategory}) => {
     return(
-        <div>
-            {/* <UserCarousel/>
-            <UserNav />  */}
-            <BoardFormModal addCategory={addCategory}/>
+        <div className="dot-grid">
+            <UserCarousel/>
+            <UserNav/> 
+            <h1>Cards render here</h1>
         </div>
     )
 }

@@ -1,0 +1,17 @@
+.user-nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.user-links{
+    display:flex;
+    width: 20%;
+}
+
+.user-button{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 80%;
+}

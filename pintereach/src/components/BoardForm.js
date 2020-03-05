@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { EditCat } from "./EditCat";
+import { ArticlesContext } from '../contexts/ArticlesContext'
 
-function BoardForm() {
+function BoardForm(props) {
+	const userId = window.localStorage.getItem("id");
+
+	const { state, fetchCategories } = useContext(ArticlesContext);
+
 	const initialState = {
 		name: ""
 	};
 
-	const id = window.localStorage.getItem("id");
+	
 
-	const [categories, setCategories] = useState([]);
 	const [data, setData] = useState(initialState);
 
 	const handleInputChange = event => {
@@ -18,10 +23,11 @@ function BoardForm() {
 		});
 	};
 
+
 	const handleFormSubmit = event => {
 		event.preventDefault();
 		axiosWithAuth()
-			.post(`/categories/${id}`, {
+			.post(`/categories/${userId}`, {
 				name: data.name
 			})
 			.then(res => {
@@ -34,16 +40,20 @@ function BoardForm() {
 	};
 
 	useEffect(() => {
+		fetchCategories();
+	}, [data]);
+	
+	const handleDelete = (id) => {
 		axiosWithAuth()
-			.get(`categories/${id}`)
+			.delete(`categories/${id}`)
 			.then(res => {
-				// console.log("rendering from get req", res.data);
-				setCategories(res.data);
+				fetchCategories();
 			})
 			.catch(err => {
 				console.log(err);
 			});
-	}, [data]);
+	}
+	
 
 	return (
 		<div>
@@ -61,11 +71,16 @@ function BoardForm() {
 				<button type="submit">Submit</button>
 			</form>
 			<div>
-				{categories.map(category => {
+				{state.categories.map(category => {
 					return (
 						<div key={category.id}>
-                            <h4>{category.name}</h4>
-                            <p>list of articles</p>
+							<h4 onClick={() => props.history.push(`/catart/${category.id}`)}>
+								{category.name}
+							</h4>
+							<EditCat category={category} />
+							<button onClick={() => handleDelete(category.id)}>delete</button>
+
+							{/* edit modal pass down name prop */}
 						</div>
 					);
 				})}
@@ -75,5 +90,7 @@ function BoardForm() {
 }
 
 export default BoardForm;
-
+// onClick={props.history.push(`/catart/`)}
 // manage state with reducers between articles and this
+
+
