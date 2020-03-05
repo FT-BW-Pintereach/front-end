@@ -58,6 +58,7 @@ div .card-footer{
 }
 
 div .category-card{
+  width: 28%;
   max-width:28%;
   margin:1%;
   padding:5%;
@@ -70,4 +71,10 @@ div .category-card{
 .delete-button{
   margin-top:8%;
  
+}
+
+.heart-icon{
+  font-size: 1.5rem;
+  color: lightgray;
+  
 }

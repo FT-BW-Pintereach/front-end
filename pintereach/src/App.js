@@ -35,7 +35,7 @@ function App() {
 		axiosWithAuth()
 			.get(`/categories/${userId}/articles`)
 			.then(res => {
-				// console.log(res.data.art);
+				// console.log("fetch art from cat", res.data.art);
 				dispatch({ type: "FETCH_USERARTICLES", payload: res.data.art });
 			})
 			.catch(err => {
@@ -43,6 +43,7 @@ function App() {
 			});
 	}
 
+	
 	return (
 		<Router>
 			<div className="App">

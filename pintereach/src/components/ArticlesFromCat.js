@@ -1,6 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { ArticlesContext } from "../contexts/ArticlesContext";
-import { Card, CardImg, CardBody, CardTitle, CardFooter } from "reactstrap";
+import { DeleteArticle } from "./DeleteArticle";
+
+import { Card, CardImg, CardBody, CardTitle, CardFooter, Button } from "reactstrap";
+
 
 const ArticlesFromCat = props => {
 	
@@ -17,8 +20,10 @@ const ArticlesFromCat = props => {
     const filtered = state.userArticles.filter(item => {
         
         return catId == item.category_id
-    });
-    
+	});
+	
+	console.log("userARt", state.userArticles);
+
 	return (
 		<div className="articles-container">
 			{filtered.map(article => {
@@ -34,6 +39,7 @@ const ArticlesFromCat = props => {
 							</CardTitle>
 							<CardFooter>
 								<p>{article.author}</p>
+								<DeleteArticle catId={catId}/>
 							</CardFooter>
 						</CardBody>
 					</Card>
@@ -42,11 +48,5 @@ const ArticlesFromCat = props => {
 		</div>
 	);
 };
-
-// title: "Mnuchin to work with Congress on funding package for coronavirus"
-// url: "https://www.wsj.com/articles/g7-finance-ministers-central-bankers-stand-ready-to-cooperate-further-to-address-coronavirus-11583240339"
-// urlToImage: "http://s.marketwatch.com/public/resources/MWimages/MW-GK371_mnuchi_ZG_20180605201729.jpg"
-// user_id: 1
-// author: "Kate Davidson"
 
 export default ArticlesFromCat;

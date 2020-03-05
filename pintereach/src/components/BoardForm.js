@@ -7,6 +7,7 @@ import UserCarousel from "./UserCarousel.js";
 import { Collapse, Button, CardBody, Card, Badge } from "reactstrap";
 import "./UserHome.css";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 
 function BoardForm(props) {
@@ -23,6 +24,10 @@ function BoardForm(props) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggle = () => setIsOpen(!isOpen);
+
+	const [heart, setHeart] = useState(false);
+
+	const toggleFav = () => setHeart(!heart)
 	
 	useEffect(() => {
 		fetchCategories();
@@ -56,11 +61,13 @@ function BoardForm(props) {
 									onClick={() => props.history.push(`/catart/${category.id}`)}
 								>
 									{category.name}
+
 									<br/><Badge className="badge" color="info">{state.userArticles.filter(item => {
 										return category.id == item.category_id;
 									}).length}
 									</Badge>
 								</h4>
+								< FaHeart className="heart-icon" onClick={toggleFav} />
 							</CardBody>
 
 							<Collapse isOpen={isOpen}>

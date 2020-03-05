@@ -19,15 +19,13 @@ import "./BoardFormModal.css";
 const BoardFormModal = props => {
 	const { buttonLabel, className, addCategory } = props;
 
-    //from react-strap
+	//from react-strap
 	const [modal, setModal] = useState(false);
-    const [unmountOnClose, setUnmountOnClose] = useState(true);
-    const toggle = () => setModal(!modal);
+	const [unmountOnClose, setUnmountOnClose] = useState(true);
+	const toggle = () => setModal(!modal);
 
 	//state for category (i.e. cat) state in this form
 	// const [cat, setCat] = useState({ name: "" });
-
-
 
 	// const changeHandler = e => {
 	// 	setCat({ ...cat, [e.target.name]: e.target.value });
@@ -40,23 +38,22 @@ const BoardFormModal = props => {
 	// };
 	// console.log("category state!", cat);
 
-    
-    //data state
-    const { fetchCategories } = useContext(ArticlesContext);
+	//data state
+	const { fetchCategories } = useContext(ArticlesContext);
 
 	const initialState = {
 		name: ""
 	};
 
 	const [data, setData] = useState(initialState);
-    const userId = window.localStorage.getItem("id");
+	const userId = window.localStorage.getItem("id");
 
-    const handleInputChange = event => {
-			setData({
-				...data,
-				[event.target.name]: event.target.value
-			});
-		};
+	const handleInputChange = event => {
+		setData({
+			...data,
+			[event.target.name]: event.target.value
+		});
+	};
 
 	const handleFormSubmit = event => {
 		event.preventDefault();
@@ -73,10 +70,10 @@ const BoardFormModal = props => {
 			});
 	};
 
-    	useEffect(() => {
-				fetchCategories();
-        }, [data]);
-    
+	useEffect(() => {
+		fetchCategories();
+	}, [data]);
+
 	return (
 		<div className="category-modal">
 			<Button color="danger" onClick={toggle} className="modal-button">
@@ -100,7 +97,6 @@ const BoardFormModal = props => {
 								type="string"
 								value={data.name}
 								onChange={handleInputChange}
-								required
 							/>
 						</FormGroup>
 					</ModalBody>
