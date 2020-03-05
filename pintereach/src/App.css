@@ -52,3 +52,22 @@ section h2{
 div .card-footer{
   background-color: rgba(0,0,0,0);
 }
+
+.edit-form{
+  width:100%;
+}
+
+div .category-card{
+  max-width:28%;
+  margin:1%;
+  padding:5%;
+}
+
+.badge{
+  margin:8% !important;
+}
+
+.delete-button{
+  margin-top:8%;
+ 
+}

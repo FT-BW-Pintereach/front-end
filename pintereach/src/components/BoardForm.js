@@ -6,6 +6,7 @@ import UserNav from "./UserNav.js";
 import UserCarousel from "./UserCarousel.js";
 import { Collapse, Button, CardBody, Card, Badge } from "reactstrap";
 import "./UserHome.css";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 
 function BoardForm(props) {
@@ -46,16 +47,16 @@ function BoardForm(props) {
 			<Button color="primary" onClick={toggle}>
 				Edit Categories
 			</Button>
-			<div>
+			<div className="articles-container">
 				{state.categories.map(category => {
 					return (
-						<Card body outline color="info" key={category.id}>
+						<Card body outline color="info" key={category.id} className="category-card">
 							<CardBody>
 								<h4
 									onClick={() => props.history.push(`/catart/${category.id}`)}
 								>
 									{category.name}
-									<Badge color="secondary">{state.userArticles.filter(item => {
+									<br/><Badge className="badge" color="info">{state.userArticles.filter(item => {
 										return category.id == item.category_id;
 									}).length}
 									</Badge>
@@ -65,10 +66,11 @@ function BoardForm(props) {
 							<Collapse isOpen={isOpen}>
 								<EditCat category={category} />
 								<Button
+									className="delete-button"
 									color="danger"
 									onClick={() => handleDelete(category.id)}
 								>
-									Delete
+									<FaRegTrashAlt/>
 								</Button>
 							</Collapse>
 						</Card>
