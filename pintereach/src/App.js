@@ -53,6 +53,18 @@ function App() {
 			});
 	};
 
+	const fetchArtFromCat = () => {
+		axiosWithAuth()
+			.get(`/categories/${userId}/articles`)
+			.then(res => {
+				console.log(res.data.art);
+				dispatch({ type: "FETCH_USERARTICLES", payload: res.data.art });
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+
 	return (
 		<Router>
 			<div className="App">
@@ -75,7 +87,7 @@ function App() {
 					)}
 				</nav>
 
-				<ArticlesContext.Provider value={{ state, dispatch, fetchCategories }}>
+				<ArticlesContext.Provider value={{ state, dispatch, fetchCategories, fetchArtFromCat }}>
 					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route path="/signup" component={Signup} />

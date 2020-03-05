@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-
+import { useForm } from 'react-hook-form'
 const Signup = props => {
+
+	const { register, handleSubmit, errors } = useForm();
+	//const onSubmit = () => {}
+
+
 	const initialState = {
 		username: "",
 		password: ""

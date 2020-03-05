@@ -88,7 +88,7 @@ const BoardFormModal = props => {
 				className={className}
 				unmountOnClose={unmountOnClose}
 			>
-				<ModalHeader toggle={toggle}>New Category...</ModalHeader>
+				<ModalHeader toggle={toggle}>Create a Category</ModalHeader>
 				<form onSubmit={handleFormSubmit}>
 					<ModalBody>
 						<FormGroup>

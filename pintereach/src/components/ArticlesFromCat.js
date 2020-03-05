@@ -5,21 +5,14 @@ import { ArticlesContext } from "../contexts/ArticlesContext";
 const ArticlesFromCat = props => {
 	const userId = window.localStorage.getItem("id");
 
-	const { state, dispatch } = useContext(ArticlesContext);
+	const { state, dispatch, fetchArtFromCat } = useContext(ArticlesContext);
 
     const catId = props.match.params.id;
    
 
 	useEffect(() => {
-		axiosWithAuth()
-			.get(`/categories/${userId}/articles`)
-			.then(res => {
-				console.log(res.data.art);
-				dispatch({ type: "FETCH_USERARTICLES", payload: res.data.art });
-			})
-			.catch(err => {
-				console.log(err);
-			});
+		
+		fetchArtFromCat();
 	}, []);
    
     const filtered = state.userArticles.filter(item => {
