@@ -1,7 +1,7 @@
 import React from 'react'
 import UserNav from './UserNav.js' 
 import UserCarousel from './UserCarousel.js'
-
+ 
 import './UserHome.css'
 
 const UserHome = ({addCategory}) => {

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { EditCat } from "./EditCat";
 import { ArticlesContext } from '../contexts/ArticlesContext'
+import UserNav from "./UserNav.js";
+import UserCarousel from "./UserCarousel.js";
 
 function BoardForm(props) {
 	const userId = window.localStorage.getItem("id");
@@ -16,28 +18,28 @@ function BoardForm(props) {
 
 	const [data, setData] = useState(initialState);
 
-	const handleInputChange = event => {
-		setData({
-			...data,
-			[event.target.name]: event.target.value
-		});
-	};
+	// const handleInputChange = event => {
+	// 	setData({
+	// 		...data,
+	// 		[event.target.name]: event.target.value
+	// 	});
+	// };
 
 
-	const handleFormSubmit = event => {
-		event.preventDefault();
-		axiosWithAuth()
-			.post(`/categories/${userId}`, {
-				name: data.name
-			})
-			.then(res => {
-				console.log(res);
-				setData(initialState);
-			})
-			.catch(err => {
-				console.log("error posting data", err);
-			});
-	};
+	// const handleFormSubmit = event => {
+	// 	event.preventDefault();
+	// 	axiosWithAuth()
+	// 		.post(`/categories/${userId}`, {
+	// 			name: data.name
+	// 		})
+	// 		.then(res => {
+	// 			console.log(res);
+	// 			setData(initialState);
+	// 		})
+	// 		.catch(err => {
+	// 			console.log("error posting data", err);
+	// 		});
+	// };
 
 	useEffect(() => {
 		fetchCategories();
@@ -56,8 +58,10 @@ function BoardForm(props) {
 	
 
 	return (
-		<div>
-			<form onSubmit={handleFormSubmit}>
+		<div className="dot-grid">
+			<UserCarousel />
+			<UserNav />
+			{/* <form onSubmit={handleFormSubmit}>
 				<label htmlFor="name">Create a category</label>
 				<input
 					id="name"
@@ -69,7 +73,7 @@ function BoardForm(props) {
 					required
 				/>
 				<button type="submit">Submit</button>
-			</form>
+			</form> */}
 			<div>
 				{state.categories.map(category => {
 					return (
