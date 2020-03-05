@@ -20,26 +20,26 @@ function App() {
 	const [state, dispatch] = useReducer(Reducer, appState);
 
 	//Category state
-	const [category, setCategory] = useState([
-		{
-			id: 2,
-			name: "Retail"
-		},
-		{
-			id: 3,
-			name: "Real Estate"
-		}
-	]);
+	// const [category, setCategory] = useState([
+	// 	{
+	// 		id: 2,
+	// 		name: "Retail"
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		name: "Real Estate"
+	// 	}
+	// ]);
 
-	console.log("all categories", category);
+	// console.log("all categories", category);
 
-	function addCategory(c) {
-		const newCategory = {
-			id: Date.now(),
-			name: c.name
-		};
-		setCategory([...category, newCategory]);
-	}
+	// function addCategory(c) {
+	// 	const newCategory = {
+	// 		id: Date.now(),
+	// 		name: c.name
+	// 	};
+	// 	setCategory([...category, newCategory]);
+	// }
 
 	const fetchCategories = () => {
 		axiosWithAuth()
@@ -92,9 +92,9 @@ function App() {
 						<Route exact path="/" component={Login} />
 						<Route path="/signup" component={Signup} />
 						<PrivateRoute path="/board" component={BoardForm} />
-						<PrivateRoute exact path="/home">
+						{/* <PrivateRoute exact path="/home">
 							<UserHome addCategory={addCategory} />
-						</PrivateRoute>
+						</PrivateRoute> */}
 						<PrivateRoute path="/articles" component={Articles} />
 						<PrivateRoute
 							exact path="/catart/:id"

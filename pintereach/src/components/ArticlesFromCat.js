@@ -3,9 +3,8 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { ArticlesContext } from "../contexts/ArticlesContext";
 
 const ArticlesFromCat = props => {
-	const userId = window.localStorage.getItem("id");
-
-	const { state, dispatch, fetchArtFromCat } = useContext(ArticlesContext);
+	
+	const { state, fetchArtFromCat } = useContext(ArticlesContext);
 
     const catId = props.match.params.id;
    
@@ -19,7 +18,7 @@ const ArticlesFromCat = props => {
         
         return catId == item.category_id
     });
-    console.log("filtered", filtered)
+    
 	return (
 		<div>
 			{filtered.map(article => {

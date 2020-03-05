@@ -5,6 +5,7 @@ import { ArticlesContext } from "../contexts/ArticlesContext";
 import UserNav from "./UserNav.js";
 import UserCarousel from "./UserCarousel.js";
 import { Collapse, Button, CardBody, Card, Badge } from "reactstrap";
+import "./UserHome.css";
 
 
 function BoardForm(props) {
@@ -21,28 +22,7 @@ function BoardForm(props) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggle = () => setIsOpen(!isOpen);
-	// const handleInputChange = event => {
-	// 	setData({
-	// 		...data,
-	// 		[event.target.name]: event.target.value
-	// 	});
-	// };
-
-	// const handleFormSubmit = event => {
-	// 	event.preventDefault();
-	// 	axiosWithAuth()
-	// 		.post(`/categories/${userId}`, {
-	// 			name: data.name
-	// 		})
-	// 		.then(res => {
-	// 			console.log(res);
-	// 			setData(initialState);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log("error posting data", err);
-	// 		});
-	// };
-
+	
 	useEffect(() => {
 		fetchCategories();
 		fetchArtFromCat();
@@ -58,35 +38,11 @@ function BoardForm(props) {
 				console.log(err);
 			});
 	};
-
-	// const catId = state.categories.map(category => {
-	// 	return category.id
-	// })
-
-	//  const filtered = state.userArticles.filter(item => {
-	// 		return catId == item.category_id;
-	// 	});
 	
-	// console.log("filtered", filtered);
-	
-	console.log("check here", state);
 	return (
 		<div className="dot-grid">
 			<UserCarousel />
 			<UserNav />
-			{/* <form onSubmit={handleFormSubmit}>
-				<label htmlFor="name">Create a category</label>
-				<input
-					id="name"
-					placeholder="Finance News"
-					name="name"
-					type="string"
-					value={data.name}
-					onChange={handleInputChange}
-					required
-				/>
-				<button type="submit">Submit</button>
-			</form> */}
 			<Button color="primary" onClick={toggle}>
 				Edit Categories
 			</Button>
@@ -115,8 +71,6 @@ function BoardForm(props) {
 									Delete
 								</Button>
 							</Collapse>
-
-							{/* edit modal pass down name prop */}
 						</Card>
 					);
 				})}
@@ -126,5 +80,4 @@ function BoardForm(props) {
 }
 
 export default BoardForm;
-// onClick={props.history.push(`/catart/`)}
-// manage state with reducers between articles and this
+
