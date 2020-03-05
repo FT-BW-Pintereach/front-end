@@ -9,7 +9,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Articles from "./components/Articles";
 import BoardForm from "./components/BoardForm";
-import UserHome from "./components/UserHome.js";
+
 import ArticlesFromCat from "./components/ArticlesFromCat";
 
 import "./App.css";
@@ -19,33 +19,11 @@ function App() {
 
 	const [state, dispatch] = useReducer(Reducer, appState);
 
-	//Category state
-	// const [category, setCategory] = useState([
-	// 	{
-	// 		id: 2,
-	// 		name: "Retail"
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		name: "Real Estate"
-	// 	}
-	// ]);
-
-	// console.log("all categories", category);
-
-	// function addCategory(c) {
-	// 	const newCategory = {
-	// 		id: Date.now(),
-	// 		name: c.name
-	// 	};
-	// 	setCategory([...category, newCategory]);
-	// }
-
 	const fetchCategories = () => {
 		axiosWithAuth()
 			.get(`categories/${userId}`)
 			.then(res => {
-				console.log("rendering from get categories", res.data);
+				// console.log("rendering from get categories", res.data);
 				dispatch({ type: "FETCH_CATEGORIES", payload: res.data });
 			})
 			.catch(err => {
@@ -57,7 +35,7 @@ function App() {
 		axiosWithAuth()
 			.get(`/categories/${userId}/articles`)
 			.then(res => {
-				console.log(res.data.art);
+				// console.log(res.data.art);
 				dispatch({ type: "FETCH_USERARTICLES", payload: res.data.art });
 			})
 			.catch(err => {
@@ -92,9 +70,6 @@ function App() {
 						<Route exact path="/" component={Login} />
 						<Route path="/signup" component={Signup} />
 						<PrivateRoute path="/board" component={BoardForm} />
-						{/* <PrivateRoute exact path="/home">
-							<UserHome addCategory={addCategory} />
-						</PrivateRoute> */}
 						<PrivateRoute path="/articles" component={Articles} />
 						<PrivateRoute
 							exact path="/catart/:id"
