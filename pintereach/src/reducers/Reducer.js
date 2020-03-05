@@ -11,6 +11,11 @@ export const Reducer = (state, action) => {
                 ...state,
                 articles: [...action.payload]
             }
+        case "FETCH_USERARTICLES":
+            return {
+                ...state,
+                userArticles: [...action.payload]
+            }
         default: return state;
     }
 }

@@ -75,9 +75,9 @@ function BoardForm() {
 					return (
 						<div key={category.id}>
 							<h4>{category.name}</h4>
-							<p>list of articles</p>
-							<button onClick={() => handleDelete(category.id)}>delete</button>
 							<EditCat category={category} />
+							<button onClick={() => handleDelete(category.id)}>delete</button>
+
 							{/* edit modal pass down name prop */}
 						</div>
 					);

@@ -9,12 +9,12 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Articles from "./components/Articles";
 import BoardForm from "./components/BoardForm";
-import UserHome from './components/UserHome.js'
+import UserHome from "./components/UserHome.js";
+import ArticlesFromCat from "./components/ArticlesFromCat";
 
 import "./App.css";
 
 function App() {
-
 	const userId = window.localStorage.getItem("id");
 
 	const [state, dispatch] = useReducer(Reducer, appState);
@@ -41,18 +41,17 @@ function App() {
 		setCategory([...category, newCategory]);
 	}
 
-		const fetchCategories = () => {
-			axiosWithAuth()
-				.get(`categories/${userId}`)
-				.then(res => {
-					console.log("rendering from get categories", res.data);
-					dispatch({ type: "FETCH_CATEGORIES", payload: res.data });
-				})
-				.catch(err => {
-					console.log(err);
-				});
-		};
-
+	const fetchCategories = () => {
+		axiosWithAuth()
+			.get(`categories/${userId}`)
+			.then(res => {
+				console.log("rendering from get categories", res.data);
+				dispatch({ type: "FETCH_CATEGORIES", payload: res.data });
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
 
 	return (
 		<Router>
@@ -81,10 +80,14 @@ function App() {
 						<Route exact path="/" component={Login} />
 						<Route path="/signup" component={Signup} />
 						<PrivateRoute path="/board" component={BoardForm} />
-						<PrivateRoute exact path='/home'>
-							<UserHome addCategory={addCategory}/>
+						<PrivateRoute exact path="/home">
+							<UserHome addCategory={addCategory} />
 						</PrivateRoute>
 						<PrivateRoute path="/articles" component={Articles} />
+						<PrivateRoute
+							path="/category-articles"
+							component={ArticlesFromCat}
+						/>
 					</Switch>
 				</ArticlesContext.Provider>
 			</div>

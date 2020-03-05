@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { ArticlesContext } from "../contexts/ArticlesContext";
+
 export const EditCat = props => {
 
 	const { fetchCategories } = useContext(ArticlesContext);
@@ -16,7 +17,6 @@ export const EditCat = props => {
 		axiosWithAuth()
 			.put(`/categories/${props.category.id}`, { name: cat })
 			.then(res => {
-				// update categories
 				fetchCategories();
 			});
 	};
