@@ -91,7 +91,7 @@ const BoardFormModal = props => {
 						<Button color="primary" onClick={toggle} type="submit">
 							Add
 						</Button>{" "}
-						<Button color="secondary" onClick={toggle} type="submit">
+						<Button color="secondary" onClick={toggle} >
 							Cancel
 						</Button>
 					</ModalFooter>

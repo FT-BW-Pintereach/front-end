@@ -13,5 +13,7 @@
 .user-button{
     display: flex;
     flex-direction: row-reverse;
-    width: 80%;
-}
+    width: 55.57%; 
+    margin-top:2%;
+    margin-bottom:1%; 
+} 

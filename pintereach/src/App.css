@@ -1,84 +1,114 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 /* .article-cards img{
   width: 100%;
 } */
 
-div .article-cards{
-  width:30%;
-  margin:1%;
+div .article-cards {
+	width: 30%;
+	margin: 1%;
 }
 
-.articles-container{
-  display:flex;
-  flex-wrap: wrap;
+.articles-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin: 1%;
+}
+
+div .card-text {
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	font-size: 0.9rem;
+}
+
+.card-text h3 {
+	font-size: 1.12rem;
+}
+
+div .navbar {
+	margin: 1%;
+	display: flex;
   justify-content: space-evenly;
-  margin:1%;
+  
 }
 
-div .card-text{
- margin-left:.5%;
- margin-right:.5%;
- font-size:.9rem;
+.navbar .link {
+	color: #393e46;
+	font-weight: bold;
+}
+.navbar .link:hover {
+	text-decoration: none;
+	color: tomato;
 }
 
-.card-text h3{
-  font-size: 1.12rem;
+section h2 {
+	margin: 2%;
+	font-size: 2.5rem;
 }
 
-div .navbar{
-  margin:1%;
-  display:flex;
-  justify-content: space-evenly;
-
+div .card-footer {
+	background-color: rgba(0, 0, 0, 0);
 }
 
-.navbar .link{
-  color:#393e46;
-  /* font-weight: bold; */
-}
-.navbar .link:hover{
-  text-decoration: none;
-  color:#929aab;
+.edit-form {
+	width: 100%;
 }
 
-section h2{
-  margin:2%;
-  font-size: 2.5rem;
+div .category-card {
+	width: 28%;
+	max-width: 28%;
+	margin: 1%;
+  padding: 5%;
+  background-color: rgba(255, 208, 0, 0.418);
 }
 
-div .card-footer{
-  background-color: rgba(0,0,0,0);
+.badge {
+	margin: 8% !important;
 }
 
-.edit-form{
-  width:100%;
+.delete-button {
+	margin-top: 8%;
 }
 
-div .category-card{
-  width: 28%;
-  max-width:28%;
-  margin:1%;
-  padding:5%;
+.edit-button {
+  width:3.5em;
+  text-align: center;
 }
 
-.badge{
-  margin:8% !important;
+.edit-icon{
+  margin-bottom: 4%;
+  font-size:1.2rem;
+  margin-left:8%;
 }
 
-.delete-button{
-  margin-top:8%;
- 
+.heart-icon {
+	font-size: 1.5rem;
+	color: lightgray;
 }
 
-.heart-icon{
-  font-size: 1.5rem;
-  color: lightgray;
+.heart-red {
+	color: rgb(255, 81, 0) !important;
+	font-size: 1.5rem !important;
 }
 
-.heart-red{
-  color: red !important;
-  font-size: 1.5rem !important;
+.underline {
+	margin-bottom: 2%;
+	width: 60%;
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(
+		to right,
+		rgba(0, 0, 0, 0),
+		rgba(0, 0, 0, 0.75),
+		rgba(0, 0, 0, 0)
+	);
+}
+
+.pin{
+  width:60px;
+  margin-top: -25%;
+  margin-left: 38%;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaFire } from "react-icons/fa";
 
 
 export const HeartIcon = () => {
@@ -9,7 +9,7 @@ export const HeartIcon = () => {
     const toggleFav = () => setHeart(!heart);
     
 	return (
-		<FaHeart
+		<FaFire
 			className={heart ? "heart-red" : "heart-icon"}
 			onClick={toggleFav}
 		/>

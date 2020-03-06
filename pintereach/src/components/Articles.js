@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import { CategoryButton } from "./CategoryButton";
 import {ArticlesContext} from '../contexts/ArticlesContext'
@@ -33,8 +33,9 @@ const Articles = () => {
 	}, []);
 
 	return (
-        <section>
-            <h2>Top Articles</h2>
+        <section >
+			<h2>Top Articles</h2>
+			<hr className="underline"/>
 			<div className="articles-container">
 				{state.articles.map(article => {
 					return (

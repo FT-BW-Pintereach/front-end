@@ -51,7 +51,7 @@ export const CategoryButton = (props) => {
 				<DropdownMenu>
 					<DropdownItem header>Select a Category</DropdownItem>
 					{state.categories.map(category => {
-						return <DropdownItem onClick={() => addArticle(category.id)}>{category.name}</DropdownItem>;
+						return <DropdownItem key={category.id} onClick={() => addArticle(category.id)}>{category.name}</DropdownItem>;
 					})}
 				</DropdownMenu>
 			</ButtonDropdown>
