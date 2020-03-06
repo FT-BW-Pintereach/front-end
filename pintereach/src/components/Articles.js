@@ -21,7 +21,7 @@ const Articles = () => {
 	useEffect(() => {
 		axios
 			.get(
-				"https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&from=2020-03-03&to=2020-03-03&sortBy=popularity&apiKey=a53c52ba003545dda97ada94feece5a7"
+				"https://newsapi.org/v2/everything?domains=wsj.com,nytimes.com&from=2020-03-03&to=2020-05-03&sortBy=popularity&pageSize=50&apiKey=a53c52ba003545dda97ada94feece5a7"
 			)
 			.then(res => {
 				console.log(res.data.articles);
