@@ -14,14 +14,16 @@ export const Navigation = () => {
 
 	return (
 		<nav className="navbar">
-			<Link className="link" to="/articles">
-				Articles
-			</Link>
-			<Link className="link" to="/board">
-				My Board
-			</Link>
 			{window.localStorage.getItem("token") ? (
-				<Button onClick={logOut}>Log Out</Button>
+				<>
+					<Link className="link" to="/articles">
+						Articles
+					</Link>
+					<Link className="link" to="/board">
+						My Board
+					</Link>
+					<Button onClick={logOut}>Log Out</Button>
+				</>
 			) : (
 				<>
 					<Link className="link" to="/">

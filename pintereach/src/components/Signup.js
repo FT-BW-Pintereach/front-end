@@ -14,7 +14,7 @@ const Signup = props => {
 				console.log("from signup!!", res);
 				// alert("successfully registered!");
 				window.localStorage.setItem("token", res.data.token);
-				props.history.push("/");
+				props.history.push("/articles");
 			})
 			.catch(error => {
 				console.log(error);
