@@ -26,8 +26,8 @@ const Login = props => {
 		<div>
 			<h2>Log In To Start Browsing Articles</h2>
 			<form onSubmit={handleSubmit(onSubmit)}  className='form-sign'>
-				<label>
-					Username
+				{/* <label>
+					Username */}
 					<input
 						type="string"
 						placeholder="Username"
@@ -38,10 +38,10 @@ const Login = props => {
 						  })}
 					/>
 				<ErrorMessage errors={errors} name='username' as='p' className='login-err'/>
-				</label>
+				{/* </label> */}
 
-				<label>
-					Password
+				{/* <label>
+					Password */}
 					<input
 						type="password"
 						placeholder="Password"
@@ -52,7 +52,7 @@ const Login = props => {
 						  })}
 					/>
 					<ErrorMessage errors={errors} name='password' as='p' className='login-err'/>
-				</label>
+				{/* </label> */}
 
 				<Button block color ="primary" type="submit" className="login-button">Log In</Button>
 			</form>

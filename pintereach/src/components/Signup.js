@@ -25,8 +25,8 @@ const Signup = props => {
 		<div>
 			<h2>Create an account</h2>
 			<form onSubmit={handleSubmit(onSubmit)} className="form-sign">
-				<label>
-					Username
+				{/* <label>
+					Username */}
 					<input
 						type="string"
 						placeholder="Create Username"
@@ -46,10 +46,10 @@ const Signup = props => {
 						as="p"
 						className="signup-err"
 					/>
-				</label>
+				{/* </label> */}
 
-				<label>
-					Password
+				{/* <label>
+					Password */}
 					<input
 						type="password"
 						placeholder="Choose Password"
@@ -70,7 +70,7 @@ const Signup = props => {
 						as="p"
 						className="signup-err"
 					/>
-				</label>
+				{/* </label> */}
 				<Button
 					block
 					color="primary"
