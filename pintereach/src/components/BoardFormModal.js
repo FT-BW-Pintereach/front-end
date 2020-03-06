@@ -23,19 +23,6 @@ const BoardFormModal = props => {
 	const [unmountOnClose, setUnmountOnClose] = useState(true);
 	const toggle = () => setModal(!modal);
 
-	//state for category (i.e. cat) state in this form
-	// const [cat, setCat] = useState({ name: "" });
-
-	// const changeHandler = e => {
-	// 	setCat({ ...cat, [e.target.name]: e.target.value });
-	// };
-
-	// const submitHandler = e => {
-	// 	e.preventDefault();
-	// 	addCategory(cat);
-	// 	setCat({ name: "" });
-	// };
-	// console.log("category state!", cat);
 
 	//data state
 	const { fetchCategories } = useContext(ArticlesContext);
