@@ -1,31 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useForm, ErrorMessage } from 'react-hook-form'
 
-
+import './SignandLog.css'
 const Login = props => {
-	const initialState = {
-		username: "",
-		password: ""
-	};
+	const { register, handleSubmit, errors } = useForm()
 
-	const [data, setData] = useState(initialState);
 
-	const handleInputChange = event => {
-		setData({
-			...data,
-			[event.target.name]: event.target.value
-		});
-	};
-
-	const handleFormSubmit = event => {
-		event.preventDefault();
+	const onSubmit = value => {
 		axiosWithAuth()
-			.post("/auth/login", {
-				username: data.username,
-				password: data.password
-			})
+			.post("/auth/login", value)
 			.then(res => {
-				// console.log("from login", res);
 				window.localStorage.setItem("token", res.data.token);
 				window.localStorage.setItem("id", res.data.id);
 				props.history.push("/articles");
@@ -33,33 +18,40 @@ const Login = props => {
 			})
 			.catch(error => {
 				console.log(error);
-				setData(initialState);
 			});
 	};
 
 	return (
 		<div>
 			<h2>Log in to start browsing articles</h2>
-			<form onSubmit={handleFormSubmit}>
-				<input
-					type="string"
-					placeholder="Username"
-					value={data.username}
-					name="username"
-					id="username"
-					onChange={handleInputChange}
-					required
-				/>
+			<form onSubmit={handleSubmit(onSubmit)}  className='form-sign'>
+				<label>
+					Username
+					<input
+						type="string"
+						placeholder="Username"
+						name="username"
+						id="username"
+						ref={register({
+							required: 'Required'
+						  })}
+					/>
+				<ErrorMessage errors={errors} name='username' as='p' className='login-err'/>
+				</label>
 
-				<input
-					type="password"
-					placeholder="Password"
-					value={data.password}
-					name="password"
-					id="password"
-					onChange={handleInputChange}
-					required
-				/>
+				<label>
+					Password
+					<input
+						type="password"
+						placeholder="Password"
+						name="password"
+						id="password"
+						ref={register({
+							required: 'Required'
+						  })}
+					/>
+					<ErrorMessage errors={errors} name='password' as='p' className='login-err'/>
+				</label>
 
 				<button type="submit">Log In</button>
 			</form>

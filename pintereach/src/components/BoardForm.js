@@ -1,49 +1,45 @@
 import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { EditCat } from "./EditCat";
-import { ArticlesContext } from '../contexts/ArticlesContext'
+import { ArticlesContext } from "../contexts/ArticlesContext";
+import UserNav from "./UserNav.js";
+import UserCarousel from "./UserCarousel.js";
+import { Collapse, Button, CardBody, Card, Badge } from "reactstrap";
+import "./UserHome.css";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { HeartIcon } from "./HeartIcon";
 
 function BoardForm(props) {
+	const { state, fetchCategories, fetchArtFromCat } = useContext(ArticlesContext);
+
+	const [catArticles, setCatArticles] = useState([]);
+
 	const userId = window.localStorage.getItem("id");
 
-	const { state, fetchCategories } = useContext(ArticlesContext);
+	// reactstrap
+	const [isOpen, setIsOpen] = useState(false);
 
-	const initialState = {
-		name: ""
-	};
+	const toggle = () => setIsOpen(!isOpen);
 
-	
-
-	const [data, setData] = useState(initialState);
-
-	const handleInputChange = event => {
-		setData({
-			...data,
-			[event.target.name]: event.target.value
-		});
-	};
-
-
-	const handleFormSubmit = event => {
-		event.preventDefault();
+	const fetchAllCategoryArticles = () => {
 		axiosWithAuth()
-			.post(`/categories/${userId}`, {
-				name: data.name
-			})
+			.get(`/categories/${userId}/articles`)
 			.then(res => {
-				console.log(res);
-				setData(initialState);
+				// console.log("fetch art from cat", res.data.art);
+				setCatArticles(res.data.art)
 			})
 			.catch(err => {
-				console.log("error posting data", err);
+				console.log(err);
 			});
 	};
 
 	useEffect(() => {
 		fetchCategories();
-	}, [data]);
-	
-	const handleDelete = (id) => {
+		fetchArtFromCat();
+		fetchAllCategoryArticles();
+	}, []);
+
+	const handleDelete = id => {
 		axiosWithAuth()
 			.delete(`categories/${id}`)
 			.then(res => {
@@ -52,36 +48,54 @@ function BoardForm(props) {
 			.catch(err => {
 				console.log(err);
 			});
-	}
-	
+	};
 
 	return (
-		<div>
-			<form onSubmit={handleFormSubmit}>
-				<label htmlFor="name">Create a category</label>
-				<input
-					id="name"
-					placeholder="Finance News"
-					name="name"
-					type="string"
-					value={data.name}
-					onChange={handleInputChange}
-					required
-				/>
-				<button type="submit">Submit</button>
-			</form>
-			<div>
+		<div className="dot-grid">
+			<UserCarousel />
+			<UserNav />
+			<Button color="primary" onClick={toggle}>
+				Edit Categories
+			</Button>
+			<div className="articles-container">
 				{state.categories.map(category => {
 					return (
-						<div key={category.id}>
-							<h4 onClick={() => props.history.push(`/catart/${category.id}`)}>
-								{category.name}
-							</h4>
-							<EditCat category={category} />
-							<button onClick={() => handleDelete(category.id)}>delete</button>
+						<Card
+							body
+							outline
+							color="info"
+							key={category.id}
+							className="category-card"
+						>
+							<CardBody>
+								<h4
+									onClick={() => props.history.push(`/catart/${category.id}`)}
+								>
+									{category.name}
 
-							{/* edit modal pass down name prop */}
-						</div>
+									<br />
+									<Badge className="badge" color="info">
+										{
+											catArticles.filter(item => {
+												return category.id == item.category_id;
+											}).length
+										}
+									</Badge>
+								</h4>
+								<HeartIcon />
+							</CardBody>
+
+							<Collapse isOpen={isOpen}>
+								<EditCat category={category} />
+								<Button
+									className="delete-button"
+									color="danger"
+									onClick={() => handleDelete(category.id)}
+								>
+									<FaRegTrashAlt />
+								</Button>
+							</Collapse>
+						</Card>
 					);
 				})}
 			</div>
@@ -90,7 +104,3 @@ function BoardForm(props) {
 }
 
 export default BoardForm;
-// onClick={props.history.push(`/catart/`)}
-// manage state with reducers between articles and this
-
-

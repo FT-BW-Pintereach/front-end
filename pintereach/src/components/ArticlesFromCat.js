@@ -1,40 +1,57 @@
 import React, { useEffect, useContext } from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { ArticlesContext } from "../contexts/ArticlesContext";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+
+import {
+	Card,
+	CardImg,
+	CardBody,
+	CardTitle,
+	CardFooter,
+	Button
+} from "reactstrap";
 
 const ArticlesFromCat = props => {
-	const userId = window.localStorage.getItem("id");
+	const { state, fetchArtFromCat } = useContext(ArticlesContext);
 
-	const { state, dispatch } = useContext(ArticlesContext);
+	const catId = props.match.params.id;
 
-    const catId = props.match.params.id;
-   
-
-	useEffect(() => {
+	const deleteArticle = id => {
 		axiosWithAuth()
-			.get(`/categories/${userId}/articles`)
+			.delete(`/articles/${id}`)
 			.then(res => {
-				console.log(res.data.art);
-				dispatch({ type: "FETCH_USERARTICLES", payload: res.data.art });
+				console.log("delete art", res);
 			})
 			.catch(err => {
-				console.log(err);
+				console.log("error", err);
 			});
-	}, []);
-   
-    const filtered = state.userArticles.filter(item => {
-        
-        return catId == item.category_id
-    });
-    console.log("filtered", filtered)
+	};
+
+	useEffect(() => {
+		fetchArtFromCat(catId);
+	}, [state]);
+
+	console.log("userARt", state.userArticles);
+
 	return (
-		<div>
-			{filtered.map(article => {
+		<div className="articles-container">
+			{state.userArticles.map(article => {
 				console.log("from articles", article);
 				return (
-					<div key={article.title}>
-						<p>{article.title}</p>
-					</div>
+					<Card className="article-cards" key={article.url}>
+						<a href={article.url} target="_blank">
+							<CardImg src={article.urlToImage} />
+						</a>
+						<CardBody className="card-text">
+							<CardTitle>
+								<h3>{article.title}</h3>
+							</CardTitle>
+							<CardFooter>
+								<p>{article.author}</p>
+								<Button onClick={() => deleteArticle(article.id)}>delete</Button>
+							</CardFooter>
+						</CardBody>
+					</Card>
 				);
 			})}
 		</div>

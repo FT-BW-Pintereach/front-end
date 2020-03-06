@@ -2,6 +2,9 @@ import React, { useState, useContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { ArticlesContext } from "../contexts/ArticlesContext";
 
+import { Input, InputGroup, Button } from "reactstrap";
+
+
 export const EditCat = props => {
 
 	const { fetchCategories } = useContext(ArticlesContext);
@@ -22,17 +25,18 @@ export const EditCat = props => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<input
-				id="name"
-				// placeholder="Finance News"
-				name="name"
-				type="string"
-				value={cat}
-				onChange={handleChanges}
-				required
-			/>
-			<button type="submit">Save</button>
+		<form className="edit-form" onSubmit={handleSubmit}>
+			<InputGroup>
+				<Input
+					id="name"
+					name="name"
+					type="string"
+					value={cat}
+					onChange={handleChanges}
+					required
+				/>
+				<Button color="info" type="submit">Save</Button>
+			</InputGroup>
 		</form>
 	);
 };
