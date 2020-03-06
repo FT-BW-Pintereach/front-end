@@ -6,8 +6,9 @@ import UserNav from "./UserNav.js";
 import UserCarousel from "./UserCarousel.js";
 import { Collapse, Button, CardBody, Card, Badge } from "reactstrap";
 import "./UserHome.css";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegTrashAlt, FaEdit } from "react-icons/fa";
 import { HeartIcon } from "./HeartIcon";
+import pin from "../img/pin.png";
 
 function BoardForm(props) {
 	const { state, fetchCategories, fetchArtFromCat } = useContext(ArticlesContext);
@@ -54,8 +55,8 @@ function BoardForm(props) {
 		<div className="dot-grid">
 			<UserCarousel />
 			<UserNav />
-			<Button color="primary" onClick={toggle}>
-				Edit Categories
+			<Button className="edit-button" color="info" onClick={toggle}>
+				<FaEdit className="edit-icon" />
 			</Button>
 			<div className="articles-container">
 				{state.categories.map(category => {
@@ -63,10 +64,11 @@ function BoardForm(props) {
 						<Card
 							body
 							outline
-							color="info"
+							color="warning"
 							key={category.id}
 							className="category-card"
 						>
+							<img className="pin" src={pin}/>
 							<CardBody>
 								<h4
 									onClick={() => props.history.push(`/catart/${category.id}`)}
@@ -74,7 +76,7 @@ function BoardForm(props) {
 									{category.name}
 
 									<br />
-									<Badge className="badge" color="info">
+									<Badge className="badge" color="danger">
 										{
 											catArticles.filter(item => {
 												return category.id == item.category_id;

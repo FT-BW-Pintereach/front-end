@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useForm, ErrorMessage } from "react-hook-form";
 import "./SignandLog.css";
+import { Button } from "reactstrap";
+
 const Signup = props => {
 	const { register, handleSubmit, errors } = useForm();
 
@@ -69,18 +71,29 @@ const Signup = props => {
 						className="signup-err"
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				<Button
+					block
+					color="primary"
+					type="submit"
+					className="login-button"
+					type="submit"
+				>
+					Sign Up
+				</Button>
 			</form>
 
-			<footer>
+			<footer className="login-footer">
 				<p>Already have an account?</p>
-				<button
+				<Button
+					block
+					color="success"
+					className="login-button2"
 					onClick={() => {
 						props.history.push("/");
 					}}
 				>
 					Log In
-				</button>
+				</Button>
 			</footer>
 		</div>
 	);

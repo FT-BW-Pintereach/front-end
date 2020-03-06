@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { ArticlesContext } from "../contexts/ArticlesContext";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 import {
 	Card,
@@ -21,6 +22,7 @@ const ArticlesFromCat = props => {
 			.delete(`/articles/${id}`)
 			.then(res => {
 				console.log("delete art", res);
+				fetchArtFromCat(catId);
 			})
 			.catch(err => {
 				console.log("error", err);
@@ -29,7 +31,7 @@ const ArticlesFromCat = props => {
 
 	useEffect(() => {
 		fetchArtFromCat(catId);
-	}, [state]);
+	}, []);
 
 	console.log("userARt", state.userArticles);
 
@@ -48,7 +50,9 @@ const ArticlesFromCat = props => {
 							</CardTitle>
 							<CardFooter>
 								<p>{article.author}</p>
-								<Button onClick={() => deleteArticle(article.id)}>delete</Button>
+								<Button color="danger" onClick={() => deleteArticle(article.id)}>
+									<FaRegTrashAlt />
+								</Button>
 							</CardFooter>
 						</CardBody>
 					</Card>
