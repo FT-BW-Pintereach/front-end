@@ -1,32 +1,41 @@
 import React, { useEffect, useContext } from "react";
 import { ArticlesContext } from "../contexts/ArticlesContext";
-import { DeleteArticle } from "./DeleteArticle";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-import { Card, CardImg, CardBody, CardTitle, CardFooter, Button } from "reactstrap";
-
+import {
+	Card,
+	CardImg,
+	CardBody,
+	CardTitle,
+	CardFooter,
+	Button
+} from "reactstrap";
 
 const ArticlesFromCat = props => {
-	
 	const { state, fetchArtFromCat } = useContext(ArticlesContext);
 
-    const catId = props.match.params.id;
-   
+	const catId = props.match.params.id;
+
+	const deleteArticle = id => {
+		axiosWithAuth()
+			.delete(`/articles/${id}`)
+			.then(res => {
+				console.log("delete art", res);
+			})
+			.catch(err => {
+				console.log("error", err);
+			});
+	};
 
 	useEffect(() => {
-		
-		fetchArtFromCat();
-	}, []);
-   
-    const filtered = state.userArticles.filter(item => {
-        
-        return catId == item.category_id
-	});
-	
+		fetchArtFromCat(catId);
+	}, [state]);
+
 	console.log("userARt", state.userArticles);
 
 	return (
 		<div className="articles-container">
-			{filtered.map(article => {
+			{state.userArticles.map(article => {
 				console.log("from articles", article);
 				return (
 					<Card className="article-cards" key={article.url}>
@@ -39,7 +48,7 @@ const ArticlesFromCat = props => {
 							</CardTitle>
 							<CardFooter>
 								<p>{article.author}</p>
-								<DeleteArticle catId={catId}/>
+								<Button onClick={() => deleteArticle(article.id)}>delete</Button>
 							</CardFooter>
 						</CardBody>
 					</Card>

@@ -29,7 +29,6 @@ export const EditCat = props => {
 			<InputGroup>
 				<Input
 					id="name"
-					// placeholder="Finance News"
 					name="name"
 					type="string"
 					value={cat}

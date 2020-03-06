@@ -76,5 +76,9 @@ div .category-card{
 .heart-icon{
   font-size: 1.5rem;
   color: lightgray;
-  
+}
+
+.heart-red{
+  color: red !important;
+  font-size: 1.5rem !important;
 }

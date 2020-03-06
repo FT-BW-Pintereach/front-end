@@ -7,7 +7,6 @@ import {
 	ModalFooter,
 	Input,
 	Label,
-	Form,
 	FormGroup
 } from "reactstrap";
 
@@ -97,6 +96,7 @@ const BoardFormModal = props => {
 								type="string"
 								value={data.name}
 								onChange={handleInputChange}
+								required
 							/>
 						</FormGroup>
 					</ModalBody>

@@ -7,32 +7,37 @@ import UserCarousel from "./UserCarousel.js";
 import { Collapse, Button, CardBody, Card, Badge } from "reactstrap";
 import "./UserHome.css";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-
+import { HeartIcon } from "./HeartIcon";
 
 function BoardForm(props) {
-	
 	const { state, fetchCategories, fetchArtFromCat } = useContext(ArticlesContext);
 
-	const initialState = {
-		name: ""
-	};
+	const [catArticles, setCatArticles] = useState([]);
 
-	const [data, setData] = useState(initialState);
+	const userId = window.localStorage.getItem("id");
 
 	// reactstrap
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggle = () => setIsOpen(!isOpen);
 
-	const [heart, setHeart] = useState(false);
+	const fetchAllCategoryArticles = () => {
+		axiosWithAuth()
+			.get(`/categories/${userId}/articles`)
+			.then(res => {
+				// console.log("fetch art from cat", res.data.art);
+				setCatArticles(res.data.art)
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
 
-	const toggleFav = () => setHeart(!heart)
-	
 	useEffect(() => {
 		fetchCategories();
 		fetchArtFromCat();
-	}, [data]);
+		fetchAllCategoryArticles();
+	}, []);
 
 	const handleDelete = id => {
 		axiosWithAuth()
@@ -44,7 +49,7 @@ function BoardForm(props) {
 				console.log(err);
 			});
 	};
-	
+
 	return (
 		<div className="dot-grid">
 			<UserCarousel />
@@ -55,19 +60,29 @@ function BoardForm(props) {
 			<div className="articles-container">
 				{state.categories.map(category => {
 					return (
-						<Card body outline color="info" key={category.id} className="category-card">
+						<Card
+							body
+							outline
+							color="info"
+							key={category.id}
+							className="category-card"
+						>
 							<CardBody>
 								<h4
 									onClick={() => props.history.push(`/catart/${category.id}`)}
 								>
 									{category.name}
 
-									<br/><Badge className="badge" color="info">{state.userArticles.filter(item => {
-										return category.id == item.category_id;
-									}).length}
+									<br />
+									<Badge className="badge" color="info">
+										{
+											catArticles.filter(item => {
+												return category.id == item.category_id;
+											}).length
+										}
 									</Badge>
 								</h4>
-								< FaHeart className="heart-icon" onClick={toggleFav} />
+								<HeartIcon />
 							</CardBody>
 
 							<Collapse isOpen={isOpen}>
@@ -77,7 +92,7 @@ function BoardForm(props) {
 									color="danger"
 									onClick={() => handleDelete(category.id)}
 								>
-									<FaRegTrashAlt/>
+									<FaRegTrashAlt />
 								</Button>
 							</Collapse>
 						</Card>
@@ -89,4 +104,3 @@ function BoardForm(props) {
 }
 
 export default BoardForm;
-

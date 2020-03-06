@@ -18,24 +18,15 @@ export const DeleteArticle = props => {
 			});
 	}, []);
 
-    console.log("data", data)
-    
+    // console.log("data", data)
+
     const id = data.map(article => {
         return article.id;
     });
 
-    console.log("id", id);
+    // console.log("id", id);
 
-	const deleteArticle = id => {
-		axiosWithAuth()
-			.delete(`/articles/${id}`)
-			.then(res => {
-				console.log("delete art", res);
-			})
-			.catch(err => {
-				console.log("error", err);
-			});
-	};
 
-	return <Button onClick={deleteArticle}>delete</Button>;
+
+
 };

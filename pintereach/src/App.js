@@ -31,12 +31,12 @@ function App() {
 			});
 	};
 
-	const fetchArtFromCat = () => {
+	const fetchArtFromCat = (id) => {
 		axiosWithAuth()
-			.get(`/categories/${userId}/articles`)
+			.get(`/articles/${id}`)
 			.then(res => {
 				// console.log("fetch art from cat", res.data.art);
-				dispatch({ type: "FETCH_USERARTICLES", payload: res.data.art });
+				dispatch({ type: "FETCH_USERARTICLES", payload: res.data });
 			})
 			.catch(err => {
 				console.log(err);
